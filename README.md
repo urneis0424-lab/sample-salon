@@ -1,21 +1,130 @@
-```txt
+# Salon de Beauté - 美容室/サロンウェブサイト
+
+## プロジェクト概要
+- **名前**: Salon de Beauté
+- **目的**: 美容室・ネイルサロン向けの魅力的なウェブサイト
+- **主な機能**: 
+  - モダンなヒーローセクション
+  - サービス紹介
+  - メニュー・料金表
+  - ギャラリー
+  - お問い合わせフォーム
+  - レスポンシブデザイン
+
+## URL
+- **開発環境**: https://3000-ivt7oay2mi137p2xfp3h7-2b54fc91.sandbox.novita.ai
+- **本番環境**: (Cloudflare Pagesへデプロイ後に追加)
+
+## 実装済み機能
+
+✅ **完成している機能**
+1. **ナビゲーション**: 固定ヘッダーナビゲーション、スムーススクロール
+2. **ヒーローセクション**: グラデーション背景、大きなタイトル、CTAボタン
+3. **サービスセクション**: 
+   - ヘアカット（カット、ブロー、前髪カット）
+   - カラーリング（フルカラー、ハイライト、グラデーション）
+   - ネイル（ジェルネイル、ネイルアート、ネイルケア）
+4. **メニュー・料金セクション**:
+   - ヘアメニュー（カット ¥4,500、カラー ¥8,800、パーマ ¥9,900、トリートメント ¥3,300〜）
+   - ネイルメニュー（ジェルネイル ¥5,500〜、フットネイル ¥6,600、ネイルケア ¥3,300）
+5. **ギャラリーセクション**: 6枚の施術例プレースホルダー
+6. **お問い合わせフォーム**: 名前、メール、電話、メッセージ送信機能
+7. **店舗情報**: 住所、電話番号、営業時間、初回限定キャンペーン
+8. **フッター**: リンク、SNSアイコン
+
+## 機能エンドポイント
+- `GET /` - メインページ（すべてのセクションを含む）
+- `POST /api/contact` - お問い合わせフォーム送信
+  - パラメータ: `name`, `email`, `phone`, `message`
+  - レスポンス: `{ success: true, message: "..." }`
+
+## 未実装機能
+
+🔄 **今後追加予定**
+1. モバイルメニュー（ハンバーガーメニュー）
+2. 実際の画像ギャラリー
+3. 予約システム（カレンダー連携）
+4. Cloudflare D1データベース統合（お問い合わせデータ保存）
+5. メール送信機能（お問い合わせ通知）
+6. スタッフ紹介セクション
+
+## データアーキテクチャ
+- **データモデル**: お問い合わせフォーム（name, email, phone, message）
+- **ストレージサービス**: 現在はメモリ（今後Cloudflare D1に移行予定）
+- **データフロー**: フォーム送信 → API → コンソールログ（今後D1/Email送信に変更）
+
+## 推奨される次のステップ
+1. **データベース統合**: Cloudflare D1を使ってお問い合わせデータを永続化
+2. **画像追加**: 実際のサロン写真をギャラリーに追加
+3. **メール機能**: SendGridやResend APIでメール通知を実装
+4. **予約システム**: カレンダーUIと予約管理機能の追加
+5. **SEO最適化**: メタタグ、構造化データの追加
+6. **本番デプロイ**: Cloudflare Pagesへのデプロイ
+
+## 利用方法
+
+### ローカル開発
+```bash
+# 依存関係のインストール
 npm install
-npm run dev
+
+# ビルド
+npm run build
+
+# 開発サーバー起動（PM2使用）
+pm2 start ecosystem.config.cjs
+
+# サーバー確認
+curl http://localhost:3000
+
+# ログ確認
+pm2 logs webapp --nostream
 ```
 
-```txt
+### 本番デプロイ
+```bash
+# Cloudflare Pagesにデプロイ
 npm run deploy
 ```
 
-[For generating/synchronizing types based on your Worker configuration run](https://developers.cloudflare.com/workers/wrangler/commands/#types):
-
-```txt
+### 型生成
+```bash
+# Cloudflare Workers設定に基づいた型の生成
 npm run cf-typegen
 ```
 
-Pass the `CloudflareBindings` as generics when instantiation `Hono`:
+## 技術スタック
+- **フレームワーク**: Hono (Cloudflare Workers)
+- **スタイリング**: TailwindCSS (CDN)
+- **アイコン**: Font Awesome 6
+- **デプロイ**: Cloudflare Pages
+- **ビルドツール**: Vite
+- **プロセス管理**: PM2
 
-```ts
-// src/index.ts
-const app = new Hono<{ Bindings: CloudflareBindings }>()
+## デプロイ状況
+- **プラットフォーム**: Cloudflare Pages (準備済み)
+- **ステータス**: ✅ ローカル開発環境で動作中
+- **最終更新**: 2026-01-26
+
+## プロジェクト構造
 ```
+webapp/
+├── src/
+│   ├── index.tsx          # メインアプリケーション（Hono + JSX）
+│   └── renderer.tsx       # HTMLレンダラー
+├── public/
+│   └── static/
+│       └── style.css      # カスタムCSS
+├── dist/                  # ビルド出力
+├── ecosystem.config.cjs   # PM2設定
+├── wrangler.jsonc         # Cloudflare設定
+├── vite.config.ts         # Vite設定
+└── package.json           # 依存関係
+```
+
+## ライセンス
+MIT License
+
+---
+
+💡 **開発者へのメモ**: このプロジェクトはCloudflare Pagesでの本番運用を想定して構築されています。D1データベースやKVストレージなど、Cloudflareのサービスと簡単に統合できます。
