@@ -2,10 +2,64 @@ import { Hono } from 'hono'
 import { cors } from 'hono/cors'
 import { renderer } from './renderer'
 
-const app = new Hono()
+// TypeScript type definitions for microCMS
+type Bindings = {
+  MICROCMS_SERVICE_DOMAIN: string;
+  MICROCMS_API_KEY: string;
+}
+
+type GalleryItem = {
+  id: string;
+  title: string;
+  image: {
+    url: string;
+  };
+  category?: string;
+  description?: string;
+}
+
+type MicroCMSResponse = {
+  contents: GalleryItem[];
+  totalCount: number;
+  offset: number;
+  limit: number;
+}
+
+const app = new Hono<{ Bindings: Bindings }>()
 
 app.use('/api/*', cors())
 app.use(renderer)
+
+// API endpoint to fetch gallery from microCMS
+app.get('/api/gallery', async (c) => {
+  const { MICROCMS_SERVICE_DOMAIN, MICROCMS_API_KEY } = c.env
+  
+  try {
+    const response = await fetch(
+      `https://${MICROCMS_SERVICE_DOMAIN}.microcms.io/api/v1/gallery`,
+      {
+        headers: {
+          'X-MICROCMS-API-KEY': MICROCMS_API_KEY
+        }
+      }
+    )
+    
+    if (!response.ok) {
+      throw new Error(`microCMS API error: ${response.status}`)
+    }
+    
+    const data: MicroCMSResponse = await response.json()
+    return c.json(data.contents)
+  } catch (error) {
+    console.error('Failed to fetch gallery from microCMS:', error)
+    // Fallback to static images
+    return c.json([
+      { id: '1', title: 'Style 1', image: { url: '/static/gallery-1.jpg' } },
+      { id: '2', title: 'Style 2', image: { url: '/static/gallery-2.jpg' } },
+      { id: '3', title: 'Style 3', image: { url: '/static/gallery-3.jpg' } }
+    ])
+  }
+})
 
 // API route for reservation
 app.post('/api/reservation', async (c) => {
@@ -28,7 +82,41 @@ app.post('/api/reservation', async (c) => {
   }
 })
 
-app.get('/', (c) => {
+app.get('/', async (c) => {
+  const { MICROCMS_SERVICE_DOMAIN, MICROCMS_API_KEY } = c.env
+  
+  // Fetch gallery items from microCMS with SSR
+  let galleryItems: GalleryItem[] = []
+  try {
+    const response = await fetch(
+      `https://${MICROCMS_SERVICE_DOMAIN}.microcms.io/api/v1/gallery`,
+      {
+        headers: {
+          'X-MICROCMS-API-KEY': MICROCMS_API_KEY
+        },
+        cf: {
+          cacheTtl: 300, // Cache for 5 minutes
+          cacheEverything: true
+        }
+      }
+    )
+    
+    if (response.ok) {
+      const data: MicroCMSResponse = await response.json()
+      galleryItems = data.contents
+    } else {
+      throw new Error(`microCMS API error: ${response.status}`)
+    }
+  } catch (error) {
+    console.error('Failed to fetch gallery from microCMS:', error)
+    // Fallback to static images
+    galleryItems = [
+      { id: '1', title: 'Style 1', image: { url: '/static/gallery-1.jpg' } },
+      { id: '2', title: 'Style 2', image: { url: '/static/gallery-2.jpg' } },
+      { id: '3', title: 'Style 3', image: { url: '/static/gallery-3.jpg' } }
+    ]
+  }
+
   return c.render(
     <div class="font-sans">
       {/* Minimalist Navigation */}
@@ -175,7 +263,7 @@ app.get('/', (c) => {
         </div>
       </section>
 
-      {/* Gallery Section */}
+      {/* Gallery Section - Dynamic from microCMS */}
       <section id="gallery" class="py-32 bg-white">
         <div class="max-w-7xl mx-auto px-8">
           <div class="text-center mb-20">
@@ -184,15 +272,15 @@ app.get('/', (c) => {
           </div>
 
           <div class="grid md:grid-cols-3 gap-8">
-            <div class="aspect-square group cursor-pointer overflow-hidden">
-              <img src="/static/gallery-1.jpg" alt="Hair Style 1" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500" />
-            </div>
-            <div class="aspect-square group cursor-pointer overflow-hidden">
-              <img src="/static/gallery-2.jpg" alt="Hair Style 2" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500" />
-            </div>
-            <div class="aspect-square group cursor-pointer overflow-hidden">
-              <img src="/static/gallery-3.jpg" alt="Hair Style 3" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500" />
-            </div>
+            {galleryItems.map((item) => (
+              <div class="aspect-square group cursor-pointer overflow-hidden">
+                <img 
+                  src={item.image.url} 
+                  alt={item.title} 
+                  class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500" 
+                />
+              </div>
+            ))}
           </div>
         </div>
       </section>
