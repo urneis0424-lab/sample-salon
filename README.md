@@ -12,8 +12,9 @@
   - レスポンシブデザイン
 
 ## URL
+- **本番環境**: https://ec42a6d5.webapp-ezy.pages.dev
+- **プロジェクトURL**: https://webapp-ezy.pages.dev
 - **開発環境**: https://3000-ivt7oay2mi137p2xfp3h7-2b54fc91.sandbox.novita.ai
-- **本番環境**: (Cloudflare Pagesへデプロイ後に追加)
 
 ## 実装済み機能
 
@@ -145,9 +146,11 @@ npm run cf-typegen
 - **プロセス管理**: PM2
 
 ## デプロイ状況
-- **プラットフォーム**: Cloudflare Pages (準備済み)
-- **ステータス**: ✅ ローカル開発環境で動作中
-- **最終更新**: 2026-01-26
+- **プラットフォーム**: Cloudflare Pages
+- **ステータス**: ✅ 本番環境で稼働中
+- **最終デプロイ**: 2026-02-01
+- **プロジェクト名**: webapp
+- **本番URL**: https://ec42a6d5.webapp-ezy.pages.dev
 
 ## プロジェクト構造
 ```
