@@ -85,27 +85,18 @@ app.get('/', (c) => {
 
           <div class="grid md:grid-cols-3 gap-16 mt-24">
             <div class="text-center">
-              <div class="w-24 h-24 mx-auto mb-8 bg-gray-100 rounded-full flex items-center justify-center">
-                <span class="text-3xl">01</span>
-              </div>
               <h3 class="text-lg tracking-wider mb-4">HAIR</h3>
               <p class="text-sm text-gray-600 leading-relaxed">
                 トレンドを取り入れた<br />最新のカット技術
               </p>
             </div>
             <div class="text-center">
-              <div class="w-24 h-24 mx-auto mb-8 bg-gray-100 rounded-full flex items-center justify-center">
-                <span class="text-3xl">02</span>
-              </div>
               <h3 class="text-lg tracking-wider mb-4">COLOR</h3>
               <p class="text-sm text-gray-600 leading-relaxed">
                 髪へのダメージを最小限に<br />抑えた高品質なカラー
               </p>
             </div>
             <div class="text-center">
-              <div class="w-24 h-24 mx-auto mb-8 bg-gray-100 rounded-full flex items-center justify-center">
-                <span class="text-3xl">03</span>
-              </div>
               <h3 class="text-lg tracking-wider mb-4">TREATMENT</h3>
               <p class="text-sm text-gray-600 leading-relaxed">
                 髪質改善のための<br />こだわりのトリートメント
