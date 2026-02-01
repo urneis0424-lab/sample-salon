@@ -148,8 +148,8 @@ app.get('/', (c) => {
 
             {/* Service Item 3 */}
             <div class="grid md:grid-cols-2 gap-12 items-center">
-              <div class="bg-gray-200 h-96 flex items-center justify-center">
-                <span class="text-gray-400 text-sm tracking-wider">TREATMENT IMAGE</span>
+              <div class="h-96 overflow-hidden">
+                <img src="/static/hair-treatment-image.jpg" alt="Hair Treatment Product" class="w-full h-full object-cover" />
               </div>
               <div>
                 <h3 class="text-2xl tracking-wider mb-6">TREATMENT</h3>
