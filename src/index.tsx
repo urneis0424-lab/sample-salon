@@ -48,8 +48,11 @@ app.get('/', (c) => {
       </nav>
 
       {/* Full Screen Hero */}
-      <section id="home" class="relative h-screen bg-gray-900 flex items-center justify-center">
-        <div class="absolute inset-0 bg-gradient-to-b from-black/40 to-black/60"></div>
+      <section id="home" class="relative h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0">
+          <img src="/hero-salon.jpg" alt="Beauty Salon Interior" class="w-full h-full object-cover" />
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-b from-black/50 to-black/70"></div>
         <div class="relative z-10 text-center text-white px-6">
           <p class="text-sm tracking-[0.3em] mb-8 font-light">Be Yourself, Beautifully</p>
           <h1 class="text-6xl md:text-8xl font-light tracking-wider mb-12 leading-tight">
