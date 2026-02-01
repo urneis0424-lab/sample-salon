@@ -273,12 +273,23 @@ app.get('/', async (c) => {
 
           <div class="grid md:grid-cols-3 gap-8">
             {galleryItems.map((item) => (
-              <div class="aspect-square group cursor-pointer overflow-hidden">
-                <img 
-                  src={item.image.url} 
-                  alt={item.title} 
-                  class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500" 
-                />
+              <div class="group cursor-pointer">
+                <div class="aspect-square overflow-hidden mb-4">
+                  <img 
+                    src={item.image.url} 
+                    alt={item.title} 
+                    class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500" 
+                  />
+                </div>
+                <div class="text-center">
+                  <h3 class="text-lg tracking-wider mb-2">{item.title}</h3>
+                  {item.category && (
+                    <p class="text-xs tracking-wider text-gray-500 mb-2">{item.category}</p>
+                  )}
+                  {item.description && (
+                    <p class="text-sm text-gray-600 leading-relaxed">{item.description}</p>
+                  )}
+                </div>
               </div>
             ))}
           </div>
