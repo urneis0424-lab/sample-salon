@@ -141,8 +141,8 @@ app.get('/', (c) => {
                   </div>
                 </div>
               </div>
-              <div class="bg-gray-200 h-96 flex items-center justify-center order-1 md:order-2">
-                <span class="text-gray-400 text-sm tracking-wider">COLOR IMAGE</span>
+              <div class="h-96 overflow-hidden order-1 md:order-2">
+                <img src="/static/hair-color-image.jpg" alt="Hair Coloring Service" class="w-full h-full object-cover" />
               </div>
             </div>
 
