@@ -184,13 +184,15 @@ app.get('/', (c) => {
           </div>
 
           <div class="grid md:grid-cols-3 gap-8">
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => (
-              <div class="bg-gray-200 aspect-square flex items-center justify-center group cursor-pointer overflow-hidden">
-                <div class="transform group-hover:scale-110 transition duration-500 w-full h-full flex items-center justify-center">
-                  <span class="text-gray-400 text-xs tracking-wider">STYLE {i}</span>
-                </div>
-              </div>
-            ))}
+            <div class="aspect-square group cursor-pointer overflow-hidden">
+              <img src="/static/gallery-1.jpg" alt="Hair Style 1" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500" />
+            </div>
+            <div class="aspect-square group cursor-pointer overflow-hidden">
+              <img src="/static/gallery-2.jpg" alt="Hair Style 2" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500" />
+            </div>
+            <div class="aspect-square group cursor-pointer overflow-hidden">
+              <img src="/static/gallery-3.jpg" alt="Hair Style 3" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500" />
+            </div>
           </div>
         </div>
       </section>
