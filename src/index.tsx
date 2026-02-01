@@ -96,8 +96,8 @@ app.get('/', (c) => {
           <div class="space-y-24">
             {/* Service Item 1 */}
             <div class="grid md:grid-cols-2 gap-12 items-center">
-              <div class="bg-gray-200 h-96 flex items-center justify-center">
-                <span class="text-gray-400 text-sm tracking-wider">HAIR STYLE IMAGE</span>
+              <div class="h-96 overflow-hidden">
+                <img src="/static/hair-cut-image.jpg" alt="Hair Cutting Service" class="w-full h-full object-cover" />
               </div>
               <div>
                 <h3 class="text-2xl tracking-wider mb-6">CUT</h3>
