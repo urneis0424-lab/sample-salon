@@ -82,27 +82,6 @@ app.get('/', (c) => {
               特別な時間をお過ごしください。
             </p>
           </div>
-
-          <div class="grid md:grid-cols-3 gap-16 mt-24">
-            <div class="text-center">
-              <h3 class="text-lg tracking-wider mb-4">HAIR</h3>
-              <p class="text-sm text-gray-600 leading-relaxed">
-                トレンドを取り入れた<br />最新のカット技術
-              </p>
-            </div>
-            <div class="text-center">
-              <h3 class="text-lg tracking-wider mb-4">COLOR</h3>
-              <p class="text-sm text-gray-600 leading-relaxed">
-                髪へのダメージを最小限に<br />抑えた高品質なカラー
-              </p>
-            </div>
-            <div class="text-center">
-              <h3 class="text-lg tracking-wider mb-4">TREATMENT</h3>
-              <p class="text-sm text-gray-600 leading-relaxed">
-                髪質改善のための<br />こだわりのトリートメント
-              </p>
-            </div>
-          </div>
         </div>
       </section>
 
