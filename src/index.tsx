@@ -118,18 +118,36 @@ app.get('/', async (c) => {
   }
 
   return c.render(
-    <div class="font-sans">
+    <div class="font-sans overflow-x-hidden">
       {/* Minimalist Navigation */}
       <nav class="fixed w-full top-0 bg-white border-b border-gray-200 z-50">
-        <div class="max-w-7xl mx-auto px-8 py-6">
+        <div class="max-w-7xl mx-auto px-4 md:px-8 py-4 md:py-6">
           <div class="flex justify-between items-center">
-            <div class="text-xl tracking-widest font-light">SALON</div>
+            <div class="text-lg md:text-xl tracking-widest font-light">SALON</div>
+            
+            {/* Desktop Menu */}
             <div class="hidden md:flex space-x-12 text-sm tracking-wider">
               <a href="#home" class="hover:text-gray-600 transition">HOME</a>
               <a href="#about" class="hover:text-gray-600 transition">ABOUT</a>
               <a href="#service" class="hover:text-gray-600 transition">SERVICE</a>
               <a href="#gallery" class="hover:text-gray-600 transition">GALLERY</a>
               <a href="#reservation" class="hover:text-gray-600 transition">RESERVATION</a>
+            </div>
+            
+            {/* Mobile Menu Button */}
+            <button id="mobile-menu-button" class="md:hidden text-2xl">
+              <span id="menu-icon">☰</span>
+            </button>
+          </div>
+          
+          {/* Mobile Menu */}
+          <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4">
+            <div class="flex flex-col space-y-4 text-sm tracking-wider">
+              <a href="#home" class="hover:text-gray-600 transition mobile-menu-link">HOME</a>
+              <a href="#about" class="hover:text-gray-600 transition mobile-menu-link">ABOUT</a>
+              <a href="#service" class="hover:text-gray-600 transition mobile-menu-link">SERVICE</a>
+              <a href="#gallery" class="hover:text-gray-600 transition mobile-menu-link">GALLERY</a>
+              <a href="#reservation" class="hover:text-gray-600 transition mobile-menu-link">RESERVATION</a>
             </div>
           </div>
         </div>
@@ -147,8 +165,7 @@ app.get('/', async (c) => {
             BEAUTY<br />SALON
           </h1>
           <p class="text-base md:text-lg tracking-widest font-light mb-12 max-w-2xl mx-auto leading-relaxed">
-            あなたらしい美しさを引き出す空間<br />
-            丁寧な施術とこだわりの技術で、最高の仕上がりをお約束します
+            あなたらしい美しさを引き出す空間
           </p>
           <a href="#reservation" class="inline-block border border-white px-12 py-4 text-sm tracking-widest hover:bg-white hover:text-black transition">
             RESERVATION
@@ -157,16 +174,16 @@ app.get('/', async (c) => {
       </section>
 
       {/* About Section */}
-      <section id="about" class="py-32 bg-white">
-        <div class="max-w-6xl mx-auto px-8">
-          <div class="text-center mb-20">
+      <section id="about" class="py-16 md:py-32 bg-white">
+        <div class="max-w-6xl mx-auto px-4 md:px-8">
+          <div class="text-center mb-12 md:mb-20">
             <p class="text-xs tracking-[0.3em] text-gray-500 mb-4">ABOUT US</p>
-            <h2 class="text-4xl md:text-5xl font-light tracking-wider mb-8">Designing Beauty for Modern Life.</h2>
-            <div class="w-16 h-px bg-black mx-auto mb-12"></div>
-            <p class="text-base leading-loose text-gray-700 max-w-2xl mx-auto">
-              私たちは、お客様一人ひとりのライフスタイルに寄り添った<br />
+            <h2 class="text-2xl md:text-4xl lg:text-5xl font-light tracking-wider mb-6 md:mb-8">Designing Beauty for Modern Life.</h2>
+            <div class="w-16 h-px bg-black mx-auto mb-8 md:mb-12"></div>
+            <p class="text-sm md:text-base leading-loose text-gray-700 max-w-2xl mx-auto">
+              私たちは、お客様一人ひとりのライフスタイルに寄り添った<br class="hidden md:inline" />
               美しさをデザインすることを大切にしています。<br />
-              上質な空間と丁寧な技術で、心も身体もリラックスできる<br />
+              上質な空間と丁寧な技術で、心も身体もリラックスできる<br class="hidden md:inline" />
               特別な時間をお過ごしください。
             </p>
           </div>
@@ -174,14 +191,14 @@ app.get('/', async (c) => {
       </section>
 
       {/* Service Section with Images */}
-      <section id="service" class="py-32 bg-gray-50">
-        <div class="max-w-6xl mx-auto px-8">
-          <div class="text-center mb-20">
+      <section id="service" class="py-16 md:py-32 bg-gray-50">
+        <div class="max-w-6xl mx-auto px-4 md:px-8">
+          <div class="text-center mb-12 md:mb-20">
             <p class="text-xs tracking-[0.3em] text-gray-500 mb-4">SERVICE</p>
-            <h2 class="text-4xl font-light tracking-wider">メニュー</h2>
+            <h2 class="text-2xl md:text-4xl font-light tracking-wider">メニュー</h2>
           </div>
 
-          <div class="space-y-24">
+          <div class="space-y-16 md:space-y-24">
             {/* Service Item 1 */}
             <div class="grid md:grid-cols-2 gap-12 items-center">
               <div class="h-96 overflow-hidden">
@@ -264,14 +281,14 @@ app.get('/', async (c) => {
       </section>
 
       {/* Gallery Section - Dynamic from microCMS */}
-      <section id="gallery" class="py-32 bg-white">
-        <div class="max-w-7xl mx-auto px-8">
-          <div class="text-center mb-20">
+      <section id="gallery" class="py-16 md:py-32 bg-white">
+        <div class="max-w-7xl mx-auto px-4 md:px-8">
+          <div class="text-center mb-12 md:mb-20">
             <p class="text-xs tracking-[0.3em] text-gray-500 mb-4">GALLERY</p>
-            <h2 class="text-4xl font-light tracking-wider">スタイルギャラリー</h2>
+            <h2 class="text-2xl md:text-4xl font-light tracking-wider">スタイルギャラリー</h2>
           </div>
 
-          <div class="grid md:grid-cols-3 gap-8">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             {galleryItems.map((item) => (
               <div class="group cursor-pointer">
                 <div class="aspect-square overflow-hidden mb-4">
@@ -297,12 +314,12 @@ app.get('/', async (c) => {
       </section>
 
       {/* Reservation Section */}
-      <section id="reservation" class="py-32 bg-gray-50">
-        <div class="max-w-3xl mx-auto px-8">
-          <div class="text-center mb-20">
+      <section id="reservation" class="py-16 md:py-32 bg-gray-50">
+        <div class="max-w-3xl mx-auto px-4 md:px-8">
+          <div class="text-center mb-12 md:mb-20">
             <p class="text-xs tracking-[0.3em] text-gray-500 mb-4">RESERVATION</p>
-            <h2 class="text-4xl font-light tracking-wider mb-8">ご予約</h2>
-            <p class="text-sm text-gray-600 leading-loose">
+            <h2 class="text-2xl md:text-4xl font-light tracking-wider mb-6 md:mb-8">ご予約</h2>
+            <p class="text-xs md:text-sm text-gray-600 leading-loose">
               お電話またはオンラインフォームにてご予約を承っております。<br />
               ご希望の日時をお選びください。
             </p>
@@ -382,10 +399,10 @@ app.get('/', async (c) => {
 
       {/* Footer */}
       <footer class="bg-gray-900 text-white py-16">
-        <div class="max-w-7xl mx-auto px-8">
+        <div class="max-w-7xl mx-auto px-4 md:px-8">
           <div class="flex flex-col md:flex-row justify-between items-center">
-            <div class="text-xl tracking-widest font-light mb-8 md:mb-0">SALON</div>
-            <div class="flex space-x-8 text-sm">
+            <div class="text-lg md:text-xl tracking-widest font-light mb-8 md:mb-0">SALON</div>
+            <div class="flex flex-wrap justify-center gap-4 md:gap-8 text-xs md:text-sm">
               <a href="#home" class="hover:text-gray-400 transition">HOME</a>
               <a href="#about" class="hover:text-gray-400 transition">ABOUT</a>
               <a href="#service" class="hover:text-gray-400 transition">SERVICE</a>
@@ -401,6 +418,24 @@ app.get('/', async (c) => {
 
       {/* JavaScript */}
       <script dangerouslySetInnerHTML={{__html: `
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        
+        mobileMenuButton.addEventListener('click', () => {
+          mobileMenu.classList.toggle('hidden');
+          menuIcon.textContent = mobileMenu.classList.contains('hidden') ? '\u2630' : '\u00d7';
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.mobile-menu-link').forEach(link => {
+          link.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+            menuIcon.textContent = '\u2630';
+          });
+        });
+        
         // Reservation form submission
         document.getElementById('reservation-form').addEventListener('submit', async (e) => {
           e.preventDefault();
